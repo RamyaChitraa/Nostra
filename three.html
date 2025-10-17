@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nostra</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --dark:#0f172a;
+      --text:#111827;
+      --muted:#6b7280;
+      --light:#f3f4f6;
+      --white:#fff;
+      --shadow:0 6px 18px rgba(0,0,0,.08);
+      --radius:16px;
+      --container:1180px;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{ font-family:"Poppins",sans-serif; color:var(--text); background:#fff; }
+
+    .container{ max-width:var(--container); margin:0 auto; padding:0 18px; }
+
+    /* Top strip */
+    .top-strip{ background:#0e1a25; color:#c7d2fe; font-weight:600; }
+    .top-strip .container{ display:flex; justify-content:center; align-items:center; padding:10px; position:relative; }
+    .top-strip .close{ position:absolute; right:12px; cursor:pointer; }
+
+    /* Header */
+    header{ background:#fff; position:sticky; top:0; z-index:20; border-bottom:1px solid #eee; }
+    .nav{ display:flex; justify-content:space-between; align-items:center; padding:16px 0; }
+    .brand{ font-size:22px; font-weight:800; }
+    .menu{ display:flex; gap:30px; }
+    .menu a{ text-decoration:none; color:#444; font-weight:500; }
+    .menu a:hover{ color:#000; }
+
+    /* Hero */
+    .hero{ position:relative; border-radius:14px; overflow:hidden; }
+    .hero-slide{ height:460px; display:none; align-items:center; justify-content:center; position:relative; }
+    .hero-slide.active{ display:flex; }
+    .hero-slide img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.55); }
+    .hero-content{ position:relative; text-align:center; color:#fff; }
+    .hero h1{ font-size:clamp(32px,6vw,72px); font-weight:900; margin-bottom:20px; }
+    .btn{ padding:12px 20px; border-radius:10px; background:#f3f4f6; border:0; font-weight:700; cursor:pointer; }
+    .btn:hover{ box-shadow:var(--shadow); }
+
+    .arrow{ position:absolute; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,.2); border:2px solid rgba(255,255,255,.6); display:flex; align-items:center; justify-content:center; cursor:pointer; }
+    .arrow svg{ width:28px; height:28px; stroke:#fff; stroke-width:2.5; fill:none; }
+    .arrow.left{ left:16px; }
+    .arrow.right{ right:16px; }
+
+    /* Brands */
+    .brands{ padding:40px 0 20px; }
+    .brand-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:20px; text-align:center; }
+    .brand-item img{ width:48px; height:48px; object-fit:contain; }
+
+    /* Section heading */
+    .section{ padding:30px 0; }
+    .section h3{ margin-bottom:16px; }
+
+    /* Grid tiles */
+    .grid-4{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
+
+    .tile{ position:relative; border-radius:14px; overflow:hidden; }
+    .tile img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .tile .overlay{ position:absolute; inset:auto 0 16px 0; display:flex; justify-content:center; }
+    .btn{ background:#f3f4f6; color:#111827; }
+
+    /* Sale & Heart */
+    .sale-badge{ position:absolute; top:12px; left:12px; background:#ef4444; color:#fff; padding:4px 10px; font-weight:700; border-radius:8px; font-size:14px; }
+    .heart{ position:absolute; top:12px; right:12px; width:32px; height:32px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,.2); }
+    .heart img{ width:18px; height:18px; }
+
+    /* Banner */
+    .banner{ margin:30px 0; background:var(--dark); color:#fff; border-radius:14px; padding:30px; display:grid; gap:20px; grid-template-columns:300px 1fr; align-items:center; }
+    .banner img{ width:100%; height:200px; object-fit:cover; border-radius:12px; }
+
+    /* Newsletter */
+    .news{text-align:center; padding:40px 0;}
+    .news h2{font-size:36px; margin-bottom:10px;}
+    .news p{color:#555; margin-bottom:14px;}
+    .news .field{display:flex; justify-content:center; gap:10px; max-width:600px; margin:auto;}
+    .news input{flex:1; padding:12px; border-radius:8px; border:1px solid #ccc;}
+    .news button{padding:12px 18px; border-radius:8px; border:0; background:#111827; color:#fff; font-weight:700;}
+
+    /* Footer */
+    footer{ background:var(--dark); color:#eee; padding:30px 0; text-align:center; margin-top:30px; }
+    footer h3{ color:#fff; font-size:28px; margin-bottom:10px; }
+    .copy{ margin-top:12px; font-size:14px; opacity:.7; }
+  </style>
+</head>
+<body>
+
+  <!-- Top strip -->
+  <div class="top-strip" id="topStrip">
+    <div class="container">
+      <span>Sign Up and <strong>GET 20% OFF</strong> for your first Order</span>
+      <span class="close" id="stripClose">✕</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">Nostra</div>
+      <nav class="menu">
+        <a href="#home">Home</a>
+        <a href="#new-arrival">New Arrival</a>
+        <a href="#most-wanted">Most Wanted</a>
+        <a href="#collections">Collections</a>
+        <a href="#contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero slider -->
+  <section class="container section" id="home">
+    <div class="hero" id="hero">
+      <div class="hero-slide active">
+        <img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/slider/slider1.jpg" alt="">
+        <div class="hero-content">
+          <div class="sub">Summer Collections</div>
+          <h1>Level up your style with our</h1>
+          <button class="btn">Shop Now →</button>
+        </div>
+      </div>
+      <div class="hero-slide">
+        <img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/others/offer.jpg" alt="">
+        <div class="hero-content">
+          <div class="sub">Trending Now</div>
+          <h1>Fresh Looks. Fresh Feels.</h1>
+          <button class="btn">Shop Now →</button>
+        </div>
+      </div>
+      <div class="arrow left" id="prev">
+        <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+      </div>
+      <div class="arrow right" id="next">
+        <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brands -->
+  <section class="container brands">
+    <h3>Brands</h3>
+    <div class="brand-row">
+      <div class="brand-item"><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/icons/adidas.png" alt=""><div>Adidas</div></div>
+      <div class="brand-item"><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/icons/behance.png" alt=""><div>Behance</div></div>
+      <div class="brand-item"><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/icons/twitch.png" alt=""><div>Twitch</div></div>
+      <div class="brand-item"><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/icons/leaves.png" alt=""><div>Leaves</div></div>
+      <div class="brand-item"><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/icons/simple.png" alt=""><div>Simple</div></div>
+      <div class="brand-item"><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/icons/adidas.png" alt=""><div>Puma</div></div>
+    </div>
+  </section>
+
+  <!-- New Arrivals -->
+  <section class="container section" id="new-arrival">
+    <h3>New Arrivals</h3>
+    <div class="grid-4">
+      <a class="tile" href="#"><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/products/f1.jpg" alt=""><div class="overlay"><button class="btn">Shop Now →</button></div></a>
+      <a class="tile" href="#"><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/products/f7.jpg" alt=""><div class="overlay"><button class="btn">Shop Now →</button></div></a>
+      <a class="tile" href="#"><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/products/n1.jpg" alt=""><div class="overlay"><button class="btn">Shop Now →</button></div></a>
+      <a class="tile" href="#"><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/products/n7.jpg" alt=""><div class="overlay"><button class="btn">Shop Now →</button></div></a>
+    </div>
+  </section>
+
+  <!-- Most Wanted -->
+  <section class="container section" id="most-wanted">
+    <h3>Most Wanted</h3>
+    <div class="grid-4">
+      <div class="tile"><span class="sale-badge">Sale</span><div class="heart"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt=""></div><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/products/n8.jpg" alt=""></div>
+      <div class="tile"><span class="sale-badge">Sale</span><div class="heart"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt=""></div><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/products/f1.jpg" alt=""></div>
+      <div class="tile"><span class="sale-badge">Sale</span><div class="heart"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt=""></div><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/products/n1.jpg" alt=""></div>
+      <div class="tile"><span class="sale-badge">Sale</span><div class="heart"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt=""></div><img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/products/n7.jpg" alt=""></div>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+      <img src="https://errormakesclever.github.io/Nostra-Ecommerce-Js/img/others/offer.jpg" alt="">
+      <div>
+        <h2>Limited Offer</h2>
+        <p>35% OFF on this for the first 30 Customers</p>
+        <button class="btn">Shop Now →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="container news" id="collections">
+    <h2>Join our News Letter</h2>
+    <p>Signup for our email newspaper to get exclusive discounts, updates, and more</p>
+    <div class="field">
+      <input type="email" placeholder="Enter your email address" />
+      <button>Subscribe →</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <h3>Nostra</h3>
+      <div>The Standard chunk of Lorem ipsum used since the 1500s is reproduced below for those interest</div>
+      <div class="copy">@ 2023 Nostra.com</div>
+    </div>
+  </footer>
+
+  <script>
+    // Top strip dismiss
+    document.getElementById('stripClose').onclick = () => {
+      document.getElementById('topStrip').style.display='none';
+    };
+
+    // Hero slider
+    const slides = document.querySelectorAll('.hero-slide');
+    let idx = 0;
+    const showSlide = (n) => {
+      slides.forEach((s,i)=> s.classList.toggle('active', i===n));
+    };
+    document.getElementById('prev').onclick = () => {
+      idx = (idx-1+slides.length)%slides.length; showSlide(idx);
+    };
+    document.getElementById('next').onclick = () => {
+      idx = (idx+1)%slides.length; showSlide(idx);
+    };
+    setInterval(()=>{ document.getElementById('next').click(); }, 5000);
+  </script>
+</body>
+</html>
