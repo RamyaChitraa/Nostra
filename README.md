@@ -32,6 +32,7 @@ Images / Media assets
 Clone the repository:
 
 git clone https://github.com/RamyaChitraa/Nostra.git
+live : https://nostra-14gj.vercel.app/
 
 
 Navigate to the folder:
